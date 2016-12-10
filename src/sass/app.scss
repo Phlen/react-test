@@ -1,18 +1,23 @@
 @import './form.scss';
-
+@import './category.scss';
 body {
     margin: 0;
     padding: 0;
 }
 
-#main {
-    width: 600px;
-    margin: 30px 0 0 300px;
-}
+// #main {
+//     width: 600px;
+//     margin: 30px 0 0 300px;
+// }
 
 h1 {
     font-size: 32px;
     color: #ccc;
+}
+
+.commentBox {
+    width: 600px;
+    margin: 100px auto;
 }
 
 .comment {

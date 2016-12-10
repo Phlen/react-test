@@ -1,9 +1,8 @@
-import '../sass/app.scss';
 
 import $ from 'jquery';
 import Markdown from 'react-remarkable';
 
-import data from './data';
+import data from '../api/data';
 
 let React = require('react'),
     ReactDOM = require('react-dom');
