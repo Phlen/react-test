@@ -1,0 +1,41 @@
+@import './form.scss';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#main {
+    width: 600px;
+    margin: 30px 0 0 300px;
+}
+
+h1 {
+    font-size: 32px;
+    color: #ccc;
+}
+
+.comment {
+    position: relative;
+
+    &.hover {
+        .delete-btn {
+            display: block;
+        }
+    }
+
+    .delete-btn {
+        display: none;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        right: 200px;
+        top: 10px;
+        border: 1px solid #dadada;
+        border-radius: 50%;
+        line-height: 40px;
+        text-align: center;
+        font-size: 28px;
+        color: #111;
+    }
+}
