@@ -6,11 +6,31 @@ let React = require('react'),
 
 // 商品栏整体
 let CategoryBox = React.createClass({
+    getInitialState: function() {
+        return {
+            filterText: '',
+            isStockOnly: false
+        };
+    },
+
+    handleUserInput: function(filterText, isStockOnly) {
+        this.setState({
+            filterText: filterText,
+            isStockOnly: isStockOnly
+        })
+    },
+
     render: function() {
         return (
             <div className="category-box">
-                <SearchBox />
-                <Products products={this.props.products}/>
+                <SearchBox 
+                    filterText={this.state.filterText}
+                    isStockOnly={this.state.isStockOnly}
+                    onUserInput={this.handleUserInput}/>
+                <Products 
+                    products={this.props.products}
+                    filterText={this.state.filterText}
+                    isStockOnly={this.state.isStockOnly}/>
             </div>
         )
     }
@@ -18,16 +38,29 @@ let CategoryBox = React.createClass({
 
 // 搜索栏
 let SearchBox = React.createClass({
+    handleChange: function() {
+        this.props.onUserInput(
+            this.refs.filterTextInput.value,
+            this.refs.isStockOnlyInput.checked
+        );
+    },
     render: function() {
         return (
             <div className="search-box">
                 <div className="search-controle">
-                    <input type="text" value=""
+                    <input type="text" 
+                    value={this.props.filterText}
+                    ref="filterTextInput"
+                    onChange={this.handleChange}
                     placeholder="Search...."
                     />
                 </div>
                 <div className="check-box">
-                    <input type="checkBox" />
+                    <input type="checkBox" 
+                        checked={this.props.isStockOnly}
+                        ref="isStockOnlyInput"
+                        onChange={this.handleChange}/>
+                    {''}
                     Only show products in stock
                 </div>
             </div>
@@ -70,13 +103,16 @@ let Products = React.createClass({
         let rows = [];
         let lastCategory = null;
         console.log(this.props.products);
-        this.props.products.forEach((product) => {
+        this.props.products.forEach(function(product) {
+            if (product.name.indexOf(this.props.filterText) === -1 || (!product.stocked && this.props.isStockOnly)) {
+            return;
+            }
             if (product.category !== lastCategory) {
-                rows.push(<ProductCategoryRow category={product.category} key={product.category} />)
+            rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
             }
             rows.push(<ProductRow product={product} key={product.name} />);
             lastCategory = product.category;
-        });
+        }.bind(this));
         return(
             <table className="table">
                 <thead>
