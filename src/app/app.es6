@@ -1,4 +1,4 @@
 import '../sass/app.scss';
 
-// import './comment';
-import './category';
+// import './comment/comment';
+import './category/category';

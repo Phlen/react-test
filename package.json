@@ -4,7 +4,7 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "dev": "webpack-dev-server --inline",
+        "dev": "PORT=3000 webpack-dev-server --inline",
         "sit": "ENV=sit webpack --profile",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

@@ -1,4 +1,4 @@
-import categories from '../api/category';
+import categories from '../../api/category';
 console.log(categories);
 
 let React = require('react'),
